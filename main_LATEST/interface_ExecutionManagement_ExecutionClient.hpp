@@ -20,6 +20,14 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
+typedef unsigned char Result;
+typedef unsigned char ExecutionState;
+
+class interface_ExecutionManagement_ExecutionClient{
+   public:
+      virtual void   Create(void)                         = 0;
+      virtual Result ReportExecutionState(ExecutionState) = 0;
+};
 
 /******************************************************************************/
 /* CONSTS                                                                     */

@@ -7,6 +7,7 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
+#include "interface_ExecutionManagement_ExecutionClient.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -15,10 +16,18 @@
 /******************************************************************************/
 /* MACROS                                                                     */
 /******************************************************************************/
+#define UNUSED(x)                                                        (x = x)
 
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
+class aapFunctionalCluster_ExecutionManagement:
+public interface_ExecutionManagement_ExecutionClient
+{
+   public:
+      void   Create(void);
+      Result ReportExecutionState(ExecutionState);
+};
 
 /******************************************************************************/
 /* CONSTS                                                                     */
@@ -35,10 +44,23 @@
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
+void aapFunctionalCluster_ExecutionManagement::Create(void){
+}
+
+Result aapFunctionalCluster_ExecutionManagement::ReportExecutionState(
+   ExecutionState ValueExecutionState
+){
+   return 0;
+}
+
 int main(
        int   argc
    ,   char* argv[]
 ){
+   aapFunctionalCluster_ExecutionManagement instance_ExecutionManagement;
+   instance_ExecutionManagement.Create();
+   Result result = instance_ExecutionManagement.ReportExecutionState(0);
+   UNUSED(result);
    return 0;
 }
 
