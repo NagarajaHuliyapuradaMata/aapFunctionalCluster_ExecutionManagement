@@ -22,7 +22,7 @@
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 class aapFunctionalCluster_ExecutionManagement:
-public interface_ExecutionManagement_ExecutionClient
+   public interface_ExecutionManagement_ExecutionClient
 {
    public:
       void   Create(void);
@@ -50,6 +50,7 @@ void aapFunctionalCluster_ExecutionManagement::Create(void){
 Result aapFunctionalCluster_ExecutionManagement::ReportExecutionState(
    ExecutionState ValueExecutionState
 ){
+   UNUSED(ValueExecutionState);
    return 0;
 }
 
