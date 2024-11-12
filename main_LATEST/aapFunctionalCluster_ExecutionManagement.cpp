@@ -7,7 +7,13 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
+#include "TypesStd.hpp"
+
 #include "interface_ExecutionManagement_ExecutionClient.hpp"
+
+#include "infClientSwcServiceDcm.hpp"
+#include "infClientSwcServiceEcuM.hpp"
+#include "infClientSwcServiceEthTp.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -16,17 +22,19 @@
 /******************************************************************************/
 /* MACROS                                                                     */
 /******************************************************************************/
-#define UNUSED(x)                                                        (x = x)
 
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 class aapFunctionalCluster_ExecutionManagement:
-   public interface_ExecutionManagement_ExecutionClient
+      public interface_ExecutionManagement_ExecutionClient
 {
+   private:
+      boolean bRequestShutdown;
+
    public:
-      void   Create(void);
-      Result ReportExecutionState(ExecutionState);
+      void    Create               (void);
+      Result  ReportExecutionState (ExecutionState ValueExecutionState);
 };
 
 /******************************************************************************/
@@ -40,6 +48,7 @@ class aapFunctionalCluster_ExecutionManagement:
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
+aapFunctionalCluster_ExecutionManagement ExecutionManagement;
 
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
@@ -58,10 +67,14 @@ int main(
        int   argc
    ,   char* argv[]
 ){
-   aapFunctionalCluster_ExecutionManagement instance_ExecutionManagement;
-   instance_ExecutionManagement.Create();
-   Result result = instance_ExecutionManagement.ReportExecutionState(0);
-   UNUSED(result);
+   SwcServiceEcuM.vInitFunction();
+   SwcServiceEthTp.vInitFunction();
+   pstinfClientSwcServiceDcm->vInitFunction();
+   do{
+      SwcServiceEthTp.vMainFunction();
+      pstinfClientSwcServiceDcm->vMainFunction();
+   }while(FALSE == SwcServiceEcuM.bGetRequestShutdown());
+   SwcServiceEthTp.vDeInitFunction();
    return 0;
 }
 
