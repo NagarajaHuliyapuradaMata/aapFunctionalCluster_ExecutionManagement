@@ -68,13 +68,13 @@ int main(
    ,   char* argv[]
 ){
    SwcServiceEcuM.vInitFunction();
-   SwcServiceEthTp.vInitFunction();
-   pstinfClientSwcServiceDcm->vInitFunction();
+   cpstinfClientSwcServiceEthTp->vInitFunction();
+   cpstinfClientSwcServiceDcm->vInitFunction();
    do{
-      SwcServiceEthTp.vMainFunction();
-      pstinfClientSwcServiceDcm->vMainFunction();
+      cpstinfClientSwcServiceEthTp->vMainFunction();
+      cpstinfClientSwcServiceDcm->vMainFunction();
    }while(FALSE == SwcServiceEcuM.bGetRequestShutdown());
-   SwcServiceEthTp.vDeInitFunction();
+   cpstinfClientSwcServiceEthTp->vDeInitFunction();
    return 0;
 }
 
